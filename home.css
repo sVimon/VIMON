@@ -1,0 +1,176 @@
+/* 1. الإعدادات العامة - نظام الألوان الموحد */
+:root {
+    --neon-red: #FF002B;
+    --dark-void: #020202;
+    --panel-gray: #111111;
+    --scan-line: rgba(255, 0, 43, 0.1);
+    --text-white: #EDF2F4;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--dark-void);
+    background-image: 
+        linear-gradient(var(--scan-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--scan-line) 1px, transparent 1px);
+    background-size: 50px 50px;
+    color: var(--text-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* --- التعديل هنا --- */
+    overflow-y: auto;  /* هادي كتعني يسمح بالطلوع والنزول إلا كان المحتوى طويل */
+    overflow-x: hidden; /* كتمنع الصفحة تمشي لليمين واليسار باش تبقى مقادة */
+    padding: 20px 0;   /* شوية ديال المساحة للفوق وللتحت باش ما تجيش لاصقة */
+}
+
+/* 2. حاوية الكارت الرئيسية بنمط Cyber Panel */
+.vinis-card {
+    position: relative;
+    width: 90%;
+    max-width: 450px;
+    background-color: var(--panel-gray);
+    padding: 50px 30px;
+    border-left: 4px solid var(--neon-red);
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    /* شكل هندسي مقصوص ليتناسب مع باقي الصفحات */
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 92% 100%, 0 100%);
+    text-align: center;
+}
+
+/* تأثير خط المسح الليزري المستمر */
+.vinis-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--neon-red);
+    box-shadow: 0 0 15px var(--neon-red);
+    animation: scanning 4s linear infinite;
+    z-index: 5;
+    opacity: 0.6;
+}
+
+@keyframes scanning {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* 3. تنسيق اللوغو الجديد */
+.main-logo-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-logo-img {
+    width: 150px;      /* خاص يكون نفس العرض */
+    height: 150px;     /* ونفس الطول */
+    border-radius: 50%; /* هادي هي اللي كتدير الدائرة */
+    object-fit: cover;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 43, 0.5));
+    animation: logo-float 3.3s infinite ease-in-out;
+}
+
+@keyframes logo-float {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.05) translateY(-10px); filter: drop-shadow(0 0 20px var(--neon-red)); }
+}
+
+/* 4. العنوان بنمط Glitch بسيط */
+.main-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    margin: 0;
+    color: white;
+    letter-spacing: 12px;
+    font-weight: 900;
+    text-shadow: 2px 2px var(--neon-red);
+}
+
+/* 5. حالة النظام (النقطة الخضراء) */
+.status-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0 35px;
+    font-size: 0.8rem;
+    color: #666;
+    letter-spacing: 2px;
+}
+
+.live-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff40;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #00ff40;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 6. قسم الشرح التقني */
+.info-section {
+    text-align: right;
+    margin-bottom: 40px;
+    border-right: 3px solid var(--neon-red);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+    font-family: 'Cairo', sans-serif;
+}
+
+.info-section p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin: 10px 0;
+    color: #bbb;
+}
+
+.info-section b {
+    color: var(--neon-red);
+    text-shadow: 0 0 5px rgba(255, 0, 43, 0.3);
+}
+
+/* 7. زر الدخول Cyber Execute */
+.enter-btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    border: 1px solid var(--neon-red);
+    color: var(--neon-red);
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    transition: all 0.4s ease;
+    box-sizing: border-box;
+}
+
+.enter-btn:hover {
+    background-color: var(--neon-red);
+    color: white;
+    box-shadow: 0 0 30px var(--neon-red);
+    transform: translateY(-5px);
+}
+
+/* 8. تذييل الصفحة */
+footer {
+    margin-top: 35px;
+    font-size: 0.65rem;
+    color: #333;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

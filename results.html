@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIMON  | لوحة التوقعات</title>
+    <link rel="stylesheet" href="results.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-spinner"></div>
+            <p>جاري تحميل النتائج...</p>
+            <small>انتظر لحظة من فضلك</small>
+        </div>
+    </div>
+
+    <div class="results-wrapper">
+        <header class="res-header">
+            <a href="start.html" class="mini-back">↩ رجوع</a>
+            <div class="user-info">ID: <span id="display-id">---</span></div>
+        </header>
+
+        <div class="prediction-container">
+            <div class="multiplier-column" id="multipliers"></div>
+            <div class="grid-board" id="grid-board"></div>
+        </div>
+
+        <div class="controls">
+            <p id="status-text">جاهز لتحليل البيانات</p>
+            <div class="button-group">
+                <button id="reset-btn" class="btn secondary">مسح</button>
+                <button id="predict-btn" class="btn primary">عرض النتيجة </button>
+            </div>
+        </div>
+    </div>
+    <script src="results.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+/* 1. الإعدادات العامة - نظام الألوان الحربي */
+:root {
+    --neon-red: #FF002B;
+    --dark-void: #020202;
+    --panel-gray: #111111;
+    --scan-line: rgba(255, 0, 43, 0.1);
+    --border-dim: #222222;
+}
+
+body {
+    background-color: var(--dark-void);
+    background-image: 
+        linear-gradient(var(--scan-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--scan-line) 1px, transparent 1px);
+    background-size: 50px 50px;
+    font-family: 'Orbitron', sans-serif; /* خط تقني للمضاعفات */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    direction: rtl;
+    color: white;
+}
+
+/* 2. حاوية النتائج بنمط هندسي مقصوص */
+.results-wrapper {
+    position: relative;
+    width: 95%;
+    max-width: 450px;
+    background: var(--panel-gray);
+    padding: 25px;
+    border-left: 4px solid var(--neon-red);
+    box-shadow: 0 0 50px rgba(0,0,0,1);
+    /* زاوية مقصوصة من الأسفل لليمين */
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 95% 100%, 0 100%);
+}
+
+/* خط المسح الليزري */
+.results-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: var(--neon-red);
+    box-shadow: 0 0 15px var(--neon-red);
+    animation: scanning 4s linear infinite;
+    z-index: 10;
+    opacity: 0.5;
+}
+
+@keyframes scanning {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+/* 3. الهيدر */
+.res-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-dim);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.mini-back {
+    text-decoration: none;
+    color: var(--neon-red);
+    font-size: 1rem;
+    font-family: 'Cairo', sans-serif;
+    border: 1px solid var(--neon-red);
+    padding: 5px 12px;
+    transition: 0.3s;
+}
+
+.mini-back:hover {
+    background: var(--neon-red);
+    color: white;
+}
+
+.user-info {
+    font-size: 0.8rem;
+    color: white;
+    letter-spacing: 2px;
+}
+
+/* 4. شبكة التوقعات - تصحيح المحاذاة الدقيق */
+.prediction-container {
+    display: flex;
+    gap: 10px; /* المسافة الأفقية بين العمودين */
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* عمود المضاعفات (x1.2, x1.5...) */
+.multiplier-column {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* يجب أن يتطابق مع gap الشبكة */
+}
+
+.m-cell {
+    height: 38px; /* ارتفاع موحد */
+    width: 65px;
+    background: #000;
+    border: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: #444;
+    border-radius: 2px;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.m-cell.active {
+    background: rgba(255, 0, 43, 0.2);
+    border-color: var(--neon-red);
+    color: var(--neon-red);
+    text-shadow: 0 0 5px var(--neon-red);
+}
+
+/* شبكة المربعات 5x10 */
+.grid-board {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px; /* يجب أن يتطابق مع gap عمود المضاعفات */
+}
+
+.cell {
+    width: 48px;
+    height: 38px; /* ارتفاع موحد يطابق m-cell */
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--border-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+
+.cell.safe {
+    border-color: var(--neon-red);
+    background: rgba(255, 0, 43, 0.1);
+    box-shadow: inset 0 0 10px rgba(255, 0, 43, 0.2);
+    animation: cellPulse 0.5s ease;
+}
+
+@keyframes cellPulse {
+    0% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* 5. الأزرار بنمط Cyber-Execute */
+.controls {
+    text-align: center;
+    margin-top: 30px;
+}
+
+#status-text {
+    font-size: 0.9rem;
+    color: var(--neon-red);
+    margin-bottom: 15px;
+    font-family: 'Cairo', sans-serif;
+    letter-spacing: 1px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    flex: 1;
+    padding: 16px;
+    background: transparent;
+    border: 1px solid var(--neon-red);
+    color: var(--neon-red);
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn.primary:hover:not(:disabled) {
+    background: var(--neon-red);
+    color: white;
+    box-shadow: 0 0 20px var(--neon-red);
+}
+
+.btn.secondary {
+    border-color: #444;
+    color: #444;
+}
+
+.btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+/* 6. النافذة المنبثقة (Cyber Modal) */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background: var(--panel-gray);
+    padding: 40px;
+    border: 1px solid var(--neon-red);
+    text-align: center;
+    /* شكل سداسي مقصوص */
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+    min-width: 250px;
+}
+
+.modal-spinner {
+    width: 40px; height: 40px;
+    border: 2px solid transparent;
+    border-top: 2px solid var(--neon-red);
+    border-bottom: 2px solid var(--neon-red);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+/* 7. الهواتف الصغيرة */
+@media (max-width: 400px) {
+    .cell { width: 42px; height: 35px; }
+    .m-cell { width: 55px; height: 35px; }
+    .results-wrapper { padding: 15px; }
+}
