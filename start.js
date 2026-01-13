@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // قائمة الـ IDs المسموح بها (أضف أرقامك هنا)
     const WHITELIST = [
-        "111111110",
+        "1528434705",
     ];
 
     input.addEventListener('input', () => {
@@ -39,3 +39,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
