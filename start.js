@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const WHITELIST = [
         "1528434705",
         "1544068261",
+        "1545426779",
         "1544771029",
         "1544327219",
         "1545409487",
@@ -290,6 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
 
 
 
